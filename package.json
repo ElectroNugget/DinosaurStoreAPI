@@ -1,0 +1,17 @@
+{
+  "name": "customer-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "customerAPI.js",
+  "scripts": {
+    "start": "node customerAPI.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "John Henrik Muller",
+  "license": "None",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
