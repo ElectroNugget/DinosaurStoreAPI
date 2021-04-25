@@ -18,18 +18,19 @@ export async function getByID(productId) {
 }
 
 export async function getAllProducts() {
-
+    let productArray = await getAll();
+    return productArray;
 }
 
 export async function getAllCategories() {
-
+    let productArray = await getAll();
+    let categoryArray = productArray.filter();
 }
 
 export async function getProductsInCategory(categoryId) {
-
+    let productArray = await getAll();
+    let categoryProductArray = productArray.filter(); 
 }
-
-//TODO: MOOAR GET METHODS GO HERE PLS 
 
 //HELPER FUNCTIONS://----------------------------------------------------------
 //Return all products on file.

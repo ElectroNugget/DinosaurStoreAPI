@@ -3,26 +3,44 @@
     "productId": 1,
     "productName": "Allosaurus",
     "latinName": "Different Lizard",
-    "manufacturer": "Biosyn",
-    "era": "Late Jurassic",
     "diet": "Carnivore",
     "category": "Large",
-    "length": "12.01 m",
-    "height": "4.02 m",
-    "weight": "2086 kg",
     "price": 1873000
   },
   {
     "productId": 2,
     "productName": "Ankylosaurus",
     "latinName": "Fuzed Lizard",
-    "manufacturer": "InGen",
     "era": "Late Cretaceous",
     "diet": "Herbivore",
     "category": "Medium",
-    "length": "7.87m m",
-    "height": "2.78m m",
-    "weight": "5442 kg",
     "price": 315000
+  },
+  {
+    "productId": 3,
+    "productName": "Apatosaurus",
+    "latinName": "Deceptive Lizard",
+    "era": "Late Jurassic",
+    "diet": "Herbivore",
+    "category": "Large",
+    "price": 851000
+  },
+  {
+    "productId": 4,
+    "productName": "Compsognathus",
+    "latinName": "Elegant Jaw",
+    "era": "Late Jurassic",
+    "diet": "Carnivorous",
+    "category": "Small",
+    "price": 95000
+  },
+  {
+    "productId": 5,
+    "productName": "Stegosaurus",
+    "latinName": "Roofed Lizard",
+    "era": "Late Jurassic",
+    "diet": "Herbivore",
+    "category": "Large",
+    "price": 320000
   }
 ]
