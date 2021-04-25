@@ -1,0 +1,24 @@
+
+GET http://localhost:8000/customers/1 HTTP/1.1
+
+###
+
+
+GET http://localhost:8000/customers/12/orders/78 HTTP/1.1
+
+###
+
+// sending wrong parameters!
+GET http://localhost:8000/customers/customerID/orders/orderID HTTP/1.1
+content-type: application/json
+
+###
+
+POST http://localhost:8000/customers/12 HTTP/1.1
+content-type: application/json
+
+{
+     "customerId": 12,
+     "customerName":"John"
+}
+###
