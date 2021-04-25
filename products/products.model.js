@@ -17,20 +17,24 @@ export async function getByID(productId) {
   }
 }
 
+//Gets all products available.
 export async function getAllProducts() {
     let productArray = await getAll();
     return productArray;
 }
 
+//Gets all categories available.
 export async function getAllCategories() {
     let productArray = await getAll();
-    let categoryArray = productArray.filter(dinosaur => dinosaur.category);
-    return categoryArray;
+    let categoryArray = productArray.map((dinosaur) => { return dinosaur.category });
+    let uniqueCategories = categoryArray.filter(onlyUnique); //Has to be filtered again to return only 1 of each category.
+    return uniqueCategories;
 }
 
+//Gets all products in a given category.
 export async function getProductsInCategory(categoryId) {
     let productArray = await getAll();
-    let categoryProductArray = productArray.filter(dinosaur => dinosaur.category === categoryId); 
+    let categoryProductArray = productArray.filter(dinosaur => dinosaur.category === categoryId);
     return categoryProductArray;
 }
 
@@ -60,4 +64,9 @@ async function save(products = []) {
 //Test function to check if product ID exists.
 function find(productArray, Id) {
   return productArray.findIndex((currProduct) => currProduct.productId === Id);
+}
+
+//Function to filter out unique values of an array.
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
 }
