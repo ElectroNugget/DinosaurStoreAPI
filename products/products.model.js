@@ -3,8 +3,9 @@ import * as fs from 'fs';
 import { promisify } from "util";
 const PRODUCTS_FILE = "./products/products.json";
 
-// Convert fs.readFile into Promise version of same    
+// Convert fs.readFile + writeFile into Promise version of same    
 const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
 
 //Get a product by a given ID. Returns an error if it does not exist.
 export async function getByID(productId) {
@@ -58,7 +59,7 @@ export async function getAll() {
 //Save an array of products to file.
 async function save(products = []) {
   let productsText = JSON.stringify(products);
-  await fs.writeFile(PRODUCTS_FILE, productsText);
+  await writeFile(PRODUCTS_FILE, productsText);
 }
 
 //Test function to check if product ID exists.

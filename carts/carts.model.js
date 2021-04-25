@@ -3,8 +3,9 @@ import * as fs from 'fs';
 import { promisify } from "util";
 const CARTS_FILE = "./cart/cart.json";
 
-// Convert fs.readFile into Promise version of same    
+// Convert fs.readFile + writeFile into Promise version of same    
 const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
 
 //Get a cart by a given ID. Returns an error if it does not exist.
 export async function getByID(cartId) {
@@ -72,7 +73,7 @@ export async function getAll() {
 //Save an array of carts to file.
 async function save(cart = []) {
   let cartText = JSON.stringify(cart);
-  await fs.writeFile(CARTS_FILE, cartText);
+  await writeFile(CARTS_FILE, cartText);
 }
 
 //Test function to check if cart ID exists.

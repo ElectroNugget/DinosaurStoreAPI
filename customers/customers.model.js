@@ -3,8 +3,9 @@ import * as fs from "fs";
 import { promisify } from "util";
 const CUSTOMERS_FILE = "./customers/customers.json";
 
-// Convert fs.readFile into Promise version of same    
+// Convert fs.readFile + writeFile into Promise version of same    
 const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
 
 //Get a customer by a given ID. Returns an error if it does not exist.
 export async function getByID(customerId) {
@@ -75,7 +76,7 @@ export async function getAll() {
 //Save an array of customers to file.
 async function save(customers = []) {
   let customersText = JSON.stringify(customers);
-  await fs.writeFile(CUSTOMERS_FILE, customersText);
+  await writeFile(CUSTOMERS_FILE, customersText);
 }
 
 //Test function to check if customer ID exists.
