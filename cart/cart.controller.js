@@ -1,7 +1,7 @@
 //Acts as the CONTROLLER for carts in this app.
 import * as cartModel from "./cart.model.js";
 
-// //POST cart : Creates a new customer
+// //POST customers/{id}/cart : Create a cart for a specific user
 export async function postCart(req, res) {
   try {
     let newCart = req.body;
@@ -12,18 +12,18 @@ export async function postCart(req, res) {
   }
 }
 
-// //GET cart{id} : Gets all data on a given cart, if it exists
+// //GET customers/{id}/cart : Gets all data on a given cart, if it exists
 export async function getCart(req, res) {
   try {
     let id = parseInt(req.params.id);
     let cart = await cartModel.getByID(id);
-    res.json(cart); //How is this sent?
+    res.json(cart);
   } catch (error) {
     res.status(400).send(error.message);
   }
 }
 
-// //PUT cart{id} : Update data on a given customer, if it exists
+// //PUT customers/{id}/cart : Update data on a given cart, if it exists
 export async function putCart(req, res) {
   try {
     let id = parseInt(req.params.id);
@@ -34,7 +34,7 @@ export async function putCart(req, res) {
   }
 }
 
-// //DELETE cart{id} : Delete all data on a given customer, if it exists
+// //DELETE customers/{id}/cart : Empty a specific cart, if it exists
 export async function deleteCart(req, res) {
   try {
     let id = parseInt(req.params.id);

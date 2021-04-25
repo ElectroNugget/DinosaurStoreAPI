@@ -1,83 +1,64 @@
 //Acts as the MODEL for carts in this app.
 import * as fs from "fs/promises";
-const CUSTOMERS_FILE = "./cart/cart.json";
+const CART_FILE = "./cart/cart.json";
 
-//Return all customers on file.
-//Probably don't need this. Not in REQS.
-export async function getAll() {
-  try {
-    let customersText = await fs.readFile(CUSTOMERS_FILE);
-    let customers = JSON.parse(customersText);
-    return customers;
-  } catch (error) {
-    if (error.code === "ENOENT") {
-      await save([]);
-      return [];
-    } else {
-      throw error;
-    }
-  }
+//Save an array of carts to file.
+async function save(cart = []) {
+  let cartText = JSON.stringify(cart);
+  await fs.writeFile(CART_FILE, cartText);
 }
 
-//Save an array of customers to file.
-//Probably not required. Completely overwrites the original file.
-async function save(customers = []) {
-  let customersText = JSON.stringify(customers);
-  await fs.writeFile(CUSTOMERS_FILE, customersText);
-}
-
-//Test function to check if customer ID exists.
-//Helper function.
-function find(customerArray, Id) {
-  return customerArray.findIndex(
-    (currCustomer) => currCustomer.customerId === Id
+//Test function to check if cart ID exists.
+function find(cartArray, Id) {
+  return cartArray.findIndex(
+    (currCart) => currCart.cartId === Id
   );
 }
 
-//Get a customer by a given ID. Returns an error if it does not exist.
-export async function getByID(customerId) {
-  let customerArray = await getAll();
-  let index = find(customerArray, customerId);
+//Get a cart by a given ID. Returns an error if it does not exist.
+export async function getByID(cartId) {
+  let cartArray = await getAll();
+  let index = find(cartArray, cartId);
   if (index === -1) {
-    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
+    throw new Error(`Cart with ID: ${cartId} doesn't exist`);
   } else {
-    return customerArray[index];
+    return cartArray[index];
   }
 }
 
-//Create a new customer. Returns an error if the ID is already taken.
-export async function add(newCustomer) {
-  let customerArray = await getAll();
-  if (find(customerArray, newCustomer.customerId) !== -1) {
+//Create a new cart. Returns an error if the ID is already taken.
+export async function add(newCart) {
+  let cartArray = await getAll();
+  if (find(cartArray, newCart.cartId) !== -1) {
     throw new Error(
-      `Customer with ID: ${newCustomer.customerId} already exists`
+      `Cart with ID: ${newCart.cartId} already exists`
     );
   } else {
-    customerArray.push(newCustomer);
-    await save(customerArray);
+    cartArray.push(newCart);
+    await save(cartArray);
   }
 }
 
-//Update an existing customer. Returns an error if there's no customer at the given ID.
-export async function update(customerId, customer) {
-  let customerArray = await getAll();
-  let index = find(customerArray, customerId);
+//Update an existing cart. Returns an error if there's no cart at the given ID.
+export async function update(cartId, cart) {
+  let cartArray = await getAll();
+  let index = find(cartArray, cartId);
   if (index === -1) {
-    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
+    throw new Error(`Cart with ID: ${cartId} doesn't exist`);
   } else {
-    customerArray[index] = customer;
-    await save(customerArray);
+    cartArray[index] = cart;
+    await save(cartArray);
   }
 }
 
-//Delete an existing customer. Returns an error if there's no customer at the given ID.
-export async function remove(customerId) {
-  let customerArray = await getAll();
-  let index = find(customerArray, customerId);
+//Delete an existing cart. Returns an error if there's no cart at the given ID.
+export async function remove(cartId) {
+  let cartArray = await getAll();
+  let index = find(cartArray, cartId);
   if (index === -1) {
-    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
+    throw new Error(`Cart with ID: ${cartId} doesn't exist`);
   } else {
-    customerArray.splice(index, 1); // remove customer from array
-    await save(customerArray);
+    cartArray.splice(index, 1); // remove cart from array
+    await save(cartArray);
   }
 }
