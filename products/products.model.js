@@ -7,9 +7,9 @@ const PRODUCTS_FILE = "./products/products.json";
 //Return all products on file.
 export async function getAll() {
   try {
-    let customersText = await fs.readFile(PRODUCTS_FILE);
-    let customers = JSON.parse(customersText);
-    return customers;
+    let productsText = await fs.readFile(PRODUCTS_FILE);
+    let products = JSON.parse(productsText);
+    return products;
   } catch (error) {
     if (error.code === "ENOENT") {
       await save([]);
@@ -20,10 +20,10 @@ export async function getAll() {
   }
 }
 
-// //Save an array of customers to file.
-// async function save(customers = []) {
-//   let customersText = JSON.stringify(customers);
-//   await fs.writeFile(PRODUCTS_FILE, customersText);
+// //Save an array of products to file.
+// async function save(products = []) {
+//   let productsText = JSON.stringify(products);
+//   await fs.writeFile(PRODUCTS_FILE, productsText);
 // }
 
 //Test function to check if product ID exists.
@@ -33,13 +33,13 @@ function find(productArray, Id) {
   );
 }
 
-//Get a customer by a given ID. Returns an error if it does not exist.
+//Get a product by a given ID. Returns an error if it does not exist.
 export async function getByID(productId) {
   let productArray = await getAll();
   let index = find(productArray, productId);
   if (index === -1) {
-    throw new Error(`Product with ID: ${customerId} doesn't exist`);
+    throw new Error(`Product with ID: ${productId} doesn't exist`);
   } else {
-    return customerArray[index];
+    return productArray[index];
   }
 }
