@@ -1,7 +1,7 @@
 //Acts as the MODEL for carts in this app.
 import * as fs from 'fs';
 import { promisify } from "util";
-const CARTS_FILE = "./cart/cart.json";
+const CARTS_FILE = "./carts/carts.json";
 
 // Convert fs.readFile + writeFile into Promise version of same    
 const readFile = promisify(fs.readFile);
