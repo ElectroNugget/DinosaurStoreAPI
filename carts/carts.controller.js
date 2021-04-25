@@ -5,6 +5,7 @@ import * as cartsModel from "./carts.model.js";
 export async function postCart(req, res) {
   try {
     let newCart = req.body;
+    console.log("Calling postCart with this data: " + newCart);
     await cartsModel.add(newCart);
     res.end();
   } catch (error) {
@@ -16,6 +17,7 @@ export async function postCart(req, res) {
 export async function getCart(req, res) {
   try {
     let id = parseInt(req.params.id);
+    console.log("Calling getCart with this id: " + id);
     let cart = await cartsModel.getByID(id);
     res.json(cart);
   } catch (error) {
@@ -27,6 +29,7 @@ export async function getCart(req, res) {
 export async function putCart(req, res) {
   try {
     let id = parseInt(req.params.id);
+    console.log("Calling putCart with this id: " + id);
     let cart = req.body;
     await cartsModel.update(id, cart);
   } catch (error) {
@@ -38,6 +41,7 @@ export async function putCart(req, res) {
 export async function deleteCart(req, res) {
   try {
     let id = parseInt(req.params.id);
+    console.log("Calling deleteCart with this id: " + id);
     await cartsModel.remove(id);
     res.end();
   } catch (error) {

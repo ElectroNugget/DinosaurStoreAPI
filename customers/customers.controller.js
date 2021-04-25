@@ -5,7 +5,7 @@ import * as customerModel from "./customers.model.js";
 export async function postCustomer(req, res) {
   try {
     let newCustomer = req.body;
-    console.log("Calling postCustomer with this data:" + newCustomer);
+    console.log("Calling postCustomer with this data: " + newCustomer);
     await customerModel.add(newCustomer);
     res.end();
   } catch (error) {
@@ -17,8 +17,9 @@ export async function postCustomer(req, res) {
 export async function getCustomer(req, res) {
   try {
     let id = parseInt(req.params.id);
-    console.log("Calling getCustomer with this id:" + id);
-    let customer = await customerModel.getByID(id);
+    console.log("Calling getCustomer with this id: " + id);
+    let customer = await customerModel.getByID(id); //gets stuck here
+    console.log("Got the customer! " + customer);
     res.json(customer); //How is this sent?
   } catch (error) {
     res.status(400).send(error.message);
@@ -29,7 +30,7 @@ export async function getCustomer(req, res) {
 export async function putCustomer(req, res) {
   try {
     let id = parseInt(req.params.id);
-    console.log("Calling putCustomer with this id:" + id);
+    console.log("Calling putCustomer with this id: " + id);
     let customer = req.body;
     await customerModel.update(id, customer);
   } catch (error) {
@@ -41,7 +42,7 @@ export async function putCustomer(req, res) {
 export async function deleteCustomer(req, res) {
   try {
     let id = parseInt(req.params.id);
-    console.log("Calling deleteCustomer with this id:" + id);
+    console.log("Calling deleteCustomer with this id: " + id);
     await customerModel.remove(id);
     res.end();
   } catch (error) {

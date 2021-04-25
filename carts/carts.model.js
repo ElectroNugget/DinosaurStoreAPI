@@ -1,6 +1,10 @@
 //Acts as the MODEL for carts in this app.
 import * as fs from 'fs';
+import { promisify } from "util";
 const CARTS_FILE = "./cart/cart.json";
+
+// Convert fs.readFile into Promise version of same    
+const readFile = promisify(fs.readFile);
 
 //Get a cart by a given ID. Returns an error if it does not exist.
 export async function getByID(cartId) {
@@ -52,7 +56,7 @@ export async function remove(cartId) {
 //Return all carts on file.
 export async function getAll() {
   try {
-    let cartText = await fs.readFile(CARTS_FILE);
+    let cartText = await readFile(CARTS_FILE);
     let cart = JSON.parse(cartText);
     return cart;
   } catch (error) {

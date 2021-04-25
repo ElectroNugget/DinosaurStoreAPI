@@ -1,6 +1,10 @@
 //Acts as the MODEL for products in this app.
 import * as fs from 'fs';
+import { promisify } from "util";
 const PRODUCTS_FILE = "./products/products.json";
+
+// Convert fs.readFile into Promise version of same    
+const readFile = promisify(fs.readFile);
 
 //Get a product by a given ID. Returns an error if it does not exist.
 export async function getByID(productId) {
@@ -19,7 +23,7 @@ export async function getByID(productId) {
 //Return all products on file.
 export async function getAll() {
   try {
-    let productsText = await fs.readFile(PRODUCTS_FILE);
+    let productsText = await readFile(PRODUCTS_FILE);
     let products = JSON.parse(productsText);
     return products;
   } catch (error) {

@@ -1,13 +1,14 @@
 //Acts as the MODEL for customers in this app.
-import * as fs from 'fs';
+import * as fs from "fs";
+import { promisify } from "util";
 const CUSTOMERS_FILE = "./customers/customers.json";
 
-//import { readFile, writeFile } from "fs/promises";
-//const fs = require('fs')
-//const fs = require('fs').promises;
+// Convert fs.readFile into Promise version of same    
+const readFile = promisify(fs.readFile);
 
 //Get a customer by a given ID. Returns an error if it does not exist.
 export async function getByID(customerId) {
+  console.log("Calling getById with this id:" + customerId);
   let customerArray = await getAll();
   let index = find(customerArray, customerId);
   if (index === -1) {
@@ -58,7 +59,8 @@ export async function remove(customerId) {
 //Return all customers on file.
 export async function getAll() {
   try {
-    let customersText = await fs.readFile(CUSTOMERS_FILE);
+    let customersText = await readFile(CUSTOMERS_FILE);
+    console.log(typeof(customersText));
     let customers = JSON.parse(customersText);
     return customers;
   } catch (error) {
