@@ -1,0 +1,28 @@
+[{   
+    "productId":1,
+    "productName": "Allosaurus",
+    "latinName": "Different Lizard",
+    "manufacturer": "Biosyn",
+    "era": "Late Jurassic",
+    "diet": "Carnivore",
+    "category": "Large",
+    "length": "12.01 m",
+    "height": "4.02 m",
+    "weight": "2086 kg",
+    "price": 1873000
+  },
+  {   
+    "productId":2,
+    "productName": "Ankylosaurus",
+    "latinName": "Fuzed Lizard",
+    "manufacturer": "InGen",
+    "era": "Late Cretaceous",
+    "diet": "Herbivore",
+    "category": "Medium",
+    "length": "7.87m m",
+    "height": "2.78m m",
+    "weight": "5442 kg",
+    "price": 315000
+  }
+]
+
