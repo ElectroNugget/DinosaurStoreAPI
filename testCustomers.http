@@ -1,28 +1,35 @@
-// get all customers
+// get all customers //WIP
 GET http://localhost:8000/customers HTTP/1.1
 
 ###
 
-// create customer
+// create customer Nikolaj //WORKS
 POST http://localhost:8000/customers HTTP/1.1
 content-type: application/json
 
-{"customerId":1, "customerName": "Nikolaj Sloth"}
+{"customerId":4, "customerName": "Nikolaj Sloth"}
 ###
 
-// get customer by id
+// get customer by id //WORKS
 GET http://localhost:8000/customers/1 HTTP/1.1
 
 ###
 
-// update customer
+// update customer Andrew //WORKS
 PUT  http://localhost:8000/customers/1 HTTP/1.1
 content-type: application/json
 
-{"customerId":15, "customerName": "John Muller UPDATED!"}
+{"customerId":1, "customerName": "Andrew McElwee UPDATED!"}
 ###
 
-// delete customer
-DELETE  http://localhost:8000/customers/1 HTTP/1.1
+// update customer Andrew to Default //WORKS
+PUT  http://localhost:8000/customers/1 HTTP/1.1
+content-type: application/json
+
+{"customerId":1, "customerName": "Andrew McElwee"}
+###
+
+// delete customer Nikolaj
+DELETE  http://localhost:8000/customers/4 HTTP/1.1
 
 ###

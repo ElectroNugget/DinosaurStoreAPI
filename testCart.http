@@ -1,28 +1,39 @@
-// get all customers
-GET http://localhost:8000/customers HTTP/1.1
-
-###
-
-// create customer
-POST http://localhost:8000/customers HTTP/1.1
+// create cart for specific user
+POST http://localhost:8000/customers/1/cart HTTP/1.1
 content-type: application/json
 
-{"customerId":16, "customerName": "Ana Peterson"}
+[
+  {
+    "customerId": 1,
+    "contents": [
+      { "productId": 1, "quantity": 1 }
+    ]
+  }
+]
 ###
 
-// get customer by id
-GET http://localhost:8000/customers/15 HTTP/1.1
+// get all information on a cart for a specific user
+GET http://localhost:8000/customers/1/cart HTTP/1.1
 
 ###
 
-// update customer
-PUT  http://localhost:8000/customers/15 HTTP/1.1
+// update cart for a specific user
+PUT  http://localhost:8000/customers/1/cart HTTP/1.1
 content-type: application/json
 
-{"customerId":15, "customerName": "John Johnson UPDATED!"}
+[
+  {
+    "cartId": 1,
+    "contents": [
+      { "productId": 1, "quantity": 1 },
+      { "productId": 2, "quantity": 2 },
+      { "productId": 3, "quantity": 3 }
+    ]
+  }
+]
 ###
 
-// delete customer
-DELETE  http://localhost:8000/customers/15 HTTP/1.1
+// delete cart for a specific user
+DELETE  http://localhost:8000/customers/1/cart HTTP/1.1
 
 ###

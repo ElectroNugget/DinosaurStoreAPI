@@ -1,43 +1,19 @@
-// get quiz by name
-GET http://localhost:3000/quizzes/BirdQuiz HTTP/1.1
+// get all products
+GET http://localhost:8000/products HTTP/1.1
 
 ###
 
+// get all categories
+GET http://localhost:8000/products/categories HTTP/1.1
 
-// create quiz
-POST http://localhost:3000/quizzes HTTP/1.1
-content-type: application/json
+###
 
-{
-  "quizName": "BirdQuiz",
-  "questions": [
-    {
-      "questionText": "What bird is the fastest on land - from Web API?",
-      "answers": [
-        {
-          "text": "Ostrich",
-          "description": "Ostrich description",
-          "imgURL": "/images/_1firstTest/Ostrich.jpg"
-        },
-        {
-          "text": "Emu",
-          "description": "Emu description",
-          "imgURL": "/images/_1firstTest/Emu.jpg"
-        },
-        {
-          "text": "Peregrine Falcon",
-          "description": "Peregrine Falcon description",
-          "imgURL": "/images/_1firstTest/Falco_peregrinus.jpg"
-        },
-        {
-          "text": "Penguin",
-          "description": "Penguin description",
-          "imgURL": "/images/_1firstTest/penguin.jpg"
-        }
-      ],
-      "correctAnswer": 0
-    }
-  ]
-}
+// get all products in a specific category (Large)
+GET http://localhost:8000/products/categories/Large HTTP/1.1
+
+###
+
+// get all data on one product (Product 1)
+GET http://localhost:8000/products/1 HTTP/1.1
 
 ###
