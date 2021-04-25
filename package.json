@@ -1,10 +1,10 @@
 {
-  "name": "customer-api",
+  "name": "dinosaur-site-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "customerAPI.js",
+  "description": "An Express API for the dinosaur site.",
+  "main": "dinositeAPI.js",
   "scripts": {
-    "start": "node customerAPI.js",
+    "start": "node dinositeAPI.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

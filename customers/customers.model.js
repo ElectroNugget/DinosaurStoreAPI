@@ -1,14 +1,15 @@
+//Acts as the MODEL for customers in this app.
 import * as fs from "fs/promises";
 const CUSTOMERS_FILE = "./customers/customers.json";
 
 //Return all customers on file.
 export async function getAll() {
-  try { 
+  try {
     let customersText = await fs.readFile(CUSTOMERS_FILE);
     let customers = JSON.parse(customersText);
     return customers;
   } catch (error) {
-    if  (error.code === "ENOENT") {
+    if (error.code === "ENOENT") {
       await save([]);
       return [];
     } else {
@@ -30,7 +31,7 @@ function find(customerArray, Id) {
   );
 }
 
-//Get a customer by a given ID.
+//Get a customer by a given ID. Returns an error if it does not exist.
 export async function getByID(customerId) {
   let customerArray = await getAll();
   let index = find(customerArray, customerId);
@@ -38,21 +39,23 @@ export async function getByID(customerId) {
     throw new Error(`Customer with ID: ${customerId} doesn't exist`);
   } else {
     return customerArray[index];
-  } 
+  }
 }
 
-//Create a new customer
+//Create a new customer. Returns an error if the ID is already taken.
 export async function add(newCustomer) {
   let customerArray = await getAll();
   if (find(customerArray, newCustomer.customerId) !== -1) {
-    throw new Error (`Customer with ID: ${newCustomer.customerId} already exists`);
+    throw new Error(
+      `Customer with ID: ${newCustomer.customerId} already exists`
+    );
   } else {
     customerArray.push(newCustomer);
     await save(customerArray);
   }
 }
 
-//Update an existing customer
+//Update an existing customer. Returns an error if there's no customer at the given ID.
 export async function update(customerId, customer) {
   let customerArray = await getAll();
   let index = find(customerArray, customerId);
@@ -64,7 +67,7 @@ export async function update(customerId, customer) {
   }
 }
 
-//Delete an existing customer
+//Delete an existing customer. Returns an error if there's no customer at the given ID.
 export async function update(customerId) {
   let customerArray = await getAll();
   let index = find(customerArray, customerId);

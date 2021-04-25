@@ -1,10 +1,11 @@
-import express from 'express';
-import * as controller from './customers.controller.js'
+//Acts as the ROUTER for customers in this app.
+import express from "express";
+import * as controller from "./customers.controller.js";
 
 export const customerRouter = express.Router();
 
 // middleware specific to this route
-customerRouter.use(express.json())
+customerRouter.use(express.json());
 
 //Route handlers
 

@@ -1,3 +1,4 @@
+//Acts as the ROUTER for products in this app.
 import express from "express";
 import * as controller from "./products.controller.js";
 
