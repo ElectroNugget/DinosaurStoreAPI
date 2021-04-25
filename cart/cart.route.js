@@ -8,16 +8,9 @@ export const customerRouter = express.Router();
 customerRouter.use(express.json());
 
 //Route handlers
-
-//Create a customer
-customerRouter.post("/customers", controller.postCustomer);
-//Modify specific customer
-customerRouter.get("/customers/:id", controller.getCustomer);
-customerRouter.put("/customers/:id", controller.putCustomer);
-customerRouter.delete("/customers/:id", controller.deleteCustomer);
-
-//Cart functions
+//Create a cart
 customerRouter.post("/customers/:id/cart", controller.postCart);
+//Modify a specific cart
 customerRouter.get("/customers/:id/cart", controller.getCart);
 customerRouter.put("/customers/:id/cart", controller.putCart);
 customerRouter.delete("/customers/:id/cart", controller.deleteCart);
