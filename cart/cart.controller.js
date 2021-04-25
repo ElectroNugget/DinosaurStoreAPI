@@ -1,44 +1,44 @@
 //Acts as the CONTROLLER for carts in this app.
-import * as customerModel from "./cart.model.js";
+import * as cartModel from "./cart.model.js";
 
-// //POST customers : Creates a new customer
+// //POST cart : Creates a new customer
 export async function postCart(req, res) {
   try {
-    let newCustomer = req.body;
-    await customerModel.add(newCustomer);
+    let newCart = req.body;
+    await cartModel.add(newCart);
     res.end();
   } catch (error) {
     res.status(400).send(error.message);
   }
 }
 
-// //GET customers{id} : Gets all data on a given customer, if it exists
+// //GET cart{id} : Gets all data on a given cart, if it exists
 export async function getCart(req, res) {
   try {
     let id = parseInt(req.params.id);
-    let customer = await customerModel.getByID(id);
-    res.json(customer); //How is this sent?
+    let cart = await cartModel.getByID(id);
+    res.json(cart); //How is this sent?
   } catch (error) {
     res.status(400).send(error.message);
   }
 }
 
-// //PUT customers{id} : Update data on a given customer, if it exists
+// //PUT cart{id} : Update data on a given customer, if it exists
 export async function putCart(req, res) {
   try {
     let id = parseInt(req.params.id);
-    let customer = req.body;
-    await customerModel.update(id, customer);
+    let cart = req.body;
+    await cartModel.update(id, cart);
   } catch (error) {
     res.status(400).send(error.message);
   }
 }
 
-// //DELETE customers{id} : Delete all data on a given customer, if it exists
+// //DELETE cart{id} : Delete all data on a given customer, if it exists
 export async function deleteCart(req, res) {
   try {
     let id = parseInt(req.params.id);
-    await customerModel.remove(id);
+    await cartModel.remove(id);
     res.end();
   } catch (error) {
     res.status(400).send(error.message);
