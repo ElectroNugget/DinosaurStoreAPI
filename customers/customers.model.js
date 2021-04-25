@@ -3,6 +3,7 @@ import * as fs from "fs/promises";
 const CUSTOMERS_FILE = "./customers/customers.json";
 
 //Return all customers on file.
+//Probably don't need this. Not in REQS.
 export async function getAll() {
   try {
     let customersText = await fs.readFile(CUSTOMERS_FILE);
@@ -19,12 +20,15 @@ export async function getAll() {
 }
 
 //Save an array of customers to file.
+//Probably not required.
+//Completely overwrites the original file.
 async function save(customers = []) {
   let customersText = JSON.stringify(customers);
   await fs.writeFile(CUSTOMERS_FILE, customersText);
 }
 
 //Test function to check if customer ID exists.
+//Helper function.
 function find(customerArray, Id) {
   return customerArray.findIndex(
     (currCustomer) => currCustomer.customerId === Id
@@ -68,6 +72,7 @@ export async function update(customerId, customer) {
 }
 
 //Delete an existing customer. Returns an error if there's no customer at the given ID.
+//Need to change this. TODO: WAT
 export async function update(customerId) {
   let customerArray = await getAll();
   let index = find(customerArray, customerId);
