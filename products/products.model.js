@@ -28,9 +28,7 @@ export async function getAll() {
 
 //Test function to check if product ID exists.
 function find(productArray, Id) {
-  return productArray.findIndex(
-    (currProduct) => currProduct.productId === Id
-  );
+  return productArray.findIndex((currProduct) => currProduct.productId === Id);
 }
 
 //Get a product by a given ID. Returns an error if it does not exist.

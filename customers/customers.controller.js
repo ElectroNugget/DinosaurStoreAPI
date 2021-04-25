@@ -44,36 +44,3 @@ export async function deleteCustomer(req, res) {
     res.status(400).send(error.message);
   }
 }
-
-export async function postCart(req, res) {
-  try{
-    let newCart = req.body;
-    await customerModel.addCart()
-  } catch (error) {
-
-  }
-}
-
-export async function getCart(req, res) {
-  try{
-    
-  } catch (error) {
-
-  }
-}
-
-export async function putCart(req, res) {
-  try{
-
-  } catch (error) {
-
-  }
-}
-
-export async function deleteCart(req, res) {
-  try{
-
-  } catch (error) {
-
-  }
-}

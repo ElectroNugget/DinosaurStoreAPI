@@ -2,38 +2,6 @@
 import * as fs from "fs/promises";
 const CUSTOMERS_FILE = "./customers/customers.json";
 
-//Return all customers on file.
-//Probably don't need this. Not in REQS.
-export async function getAll() {
-  try {
-    let customersText = await fs.readFile(CUSTOMERS_FILE);
-    let customers = JSON.parse(customersText);
-    return customers;
-  } catch (error) {
-    if (error.code === "ENOENT") {
-      await save([]);
-      return [];
-    } else {
-      throw error;
-    }
-  }
-}
-
-//Save an array of customers to file.
-//Probably not required. Completely overwrites the original file.
-async function save(customers = []) {
-  let customersText = JSON.stringify(customers);
-  await fs.writeFile(CUSTOMERS_FILE, customersText);
-}
-
-//Test function to check if customer ID exists.
-//Helper function.
-function find(customerArray, Id) {
-  return customerArray.findIndex(
-    (currCustomer) => currCustomer.customerId === Id
-  );
-}
-
 //Get a customer by a given ID. Returns an error if it does not exist.
 export async function getByID(customerId) {
   let customerArray = await getAll();
@@ -82,4 +50,32 @@ export async function remove(customerId) {
   }
 }
 
+//HELPER FUNCTIONS://----------------------------------------------------------
+//Return all customers on file.
+export async function getAll() {
+  try {
+    let customersText = await fs.readFile(CUSTOMERS_FILE);
+    let customers = JSON.parse(customersText);
+    return customers;
+  } catch (error) {
+    if (error.code === "ENOENT") {
+      await save([]);
+      return [];
+    } else {
+      throw error;
+    }
+  }
+}
 
+//Save an array of customers to file.
+async function save(customers = []) {
+  let customersText = JSON.stringify(customers);
+  await fs.writeFile(CUSTOMERS_FILE, customersText);
+}
+
+//Test function to check if customer ID exists.
+function find(customerArray, Id) {
+  return customerArray.findIndex(
+    (currCustomer) => currCustomer.customerId === Id
+  );
+}

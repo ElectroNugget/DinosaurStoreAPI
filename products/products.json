@@ -1,5 +1,6 @@
-[{   
-    "productId":1,
+[
+  {
+    "productId": 1,
     "productName": "Allosaurus",
     "latinName": "Different Lizard",
     "manufacturer": "Biosyn",
@@ -11,8 +12,8 @@
     "weight": "2086 kg",
     "price": 1873000
   },
-  {   
-    "productId":2,
+  {
+    "productId": 2,
     "productName": "Ankylosaurus",
     "latinName": "Fuzed Lizard",
     "manufacturer": "InGen",
@@ -25,4 +26,3 @@
     "price": 315000
   }
 ]
-

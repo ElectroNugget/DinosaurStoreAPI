@@ -15,4 +15,3 @@ customerRouter.post("/customers", controller.postCustomer);
 customerRouter.get("/customers/:id", controller.getCustomer);
 customerRouter.put("/customers/:id", controller.putCustomer);
 customerRouter.delete("/customers/:id", controller.deleteCustomer);
-
