@@ -19,7 +19,6 @@ export async function getCustomer(req, res) {
     let id = parseInt(req.params.id);
     console.log("Calling getCustomer with this id: " + id);
     let customer = await customerModel.getByID(id); //gets stuck here
-    console.log("Got the customer! " + customer);
     res.json(customer); //How is this sent?
   } catch (error) {
     res.status(400).send(error.message);

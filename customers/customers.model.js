@@ -8,7 +8,6 @@ const readFile = promisify(fs.readFile);
 
 //Get a customer by a given ID. Returns an error if it does not exist.
 export async function getByID(customerId) {
-  console.log("Calling getById with this id:" + customerId);
   let customerArray = await getAll();
   let index = find(customerArray, customerId);
   if (index === -1) {
