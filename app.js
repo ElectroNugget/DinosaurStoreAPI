@@ -1,20 +1,22 @@
 import express from "express";
 
 import { customersRouter } from "./customers/customers.route.js";
-// import { cartRouter } from "./cart/cart.route.js";
-// import { productsRouter } from "./products/products.route.js";
+import { cartsRouter } from "./carts/carts.route.js";
+import { productsRouter } from "./products/products.route.js";
 
 const app = express();
 const PORT = 8000;
 
 app.use(express.json());
+
+//Routers
 app.use(customersRouter);
-// app.use(cartRouter);
-// app.use(productsRouter);
+app.use(cartsRouter);
+app.use(productsRouter);
 
 // From the tutorial.
-app.get("/", (req, res) => res.send("Hello World!"));
-app.listen(PORT, () => console.log("Example app listening on port 8000!"));
+app.get("/", (req, res) => res.send("Welcome to localhost 8000!"));
+app.listen(PORT, () => console.log("DinoAPI listening on port 8000!"));
 
 // //Simple request time logger for a specific route
 // app.use('/home', (req, res, next) => {

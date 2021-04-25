@@ -2,17 +2,17 @@
 import express from "express";
 import { getAllProducts, getAllCategories, getProductsInCategory, getProduct } from "./products.controller.js";
 
-export const productRouter = express.Router();
+export const productsRouter = express.Router();
 
 //middleware specific to this route
-productRouter.use(express.json());
+productsRouter.use(express.json());
 
 //Route handlers
 //Get all products.
-productRouter.get("/products", getAllProducts);
+productsRouter.get("/products", getAllProducts);
 //Get all categories.
-productRouter.get("/products/categories", getAllCategories);
+productsRouter.get("/products/categories", getAllCategories);
 //Get products in a certain category.
-productRouter.get("/products/categories/:id", getProductsInCategory);
+productsRouter.get("/products/categories/:id", getProductsInCategory);
 //Get a specific product.
-productRouter.get("/products/:id", getProduct);
+productsRouter.get("/products/:id", getProduct);

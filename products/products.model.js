@@ -17,6 +17,18 @@ export async function getByID(productId) {
   }
 }
 
+export async function getAllProducts() {
+
+}
+
+export async function getAllCategories() {
+
+}
+
+export async function getProductsInCategory(categoryId) {
+
+}
+
 //TODO: MOOAR GET METHODS GO HERE PLS 
 
 //HELPER FUNCTIONS://----------------------------------------------------------
