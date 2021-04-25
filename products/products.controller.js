@@ -37,7 +37,7 @@ export async function getAllCategories(req, res) {
 // //GET products/categories/{id} : Gets all products in a certain category.
 export async function getProductsInCategory(req, res) {
   try {
-    let category = parseString(req.params.category);
+    let category = req.params.id;
     let products = await productModel.getProductsInCategory(category);
     res.json(products);
   } catch (error) {

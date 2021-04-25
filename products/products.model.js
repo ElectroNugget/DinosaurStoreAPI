@@ -24,12 +24,14 @@ export async function getAllProducts() {
 
 export async function getAllCategories() {
     let productArray = await getAll();
-    let categoryArray = productArray.filter();
+    let categoryArray = productArray.filter(dinosaur => dinosaur.category);
+    return categoryArray;
 }
 
 export async function getProductsInCategory(categoryId) {
     let productArray = await getAll();
-    let categoryProductArray = productArray.filter(); 
+    let categoryProductArray = productArray.filter(dinosaur => dinosaur.category === categoryId); 
+    return categoryProductArray;
 }
 
 //HELPER FUNCTIONS://----------------------------------------------------------
