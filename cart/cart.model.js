@@ -1,6 +1,6 @@
-//Acts as the MODEL for customers in this app.
+//Acts as the MODEL for carts in this app.
 import * as fs from "fs/promises";
-const CUSTOMERS_FILE = "./customers/customers.json";
+const CUSTOMERS_FILE = "./cart/cart.json";
 
 //Return all customers on file.
 //Probably don't need this. Not in REQS.
@@ -81,5 +81,3 @@ export async function remove(customerId) {
     await save(customerArray);
   }
 }
-
-
