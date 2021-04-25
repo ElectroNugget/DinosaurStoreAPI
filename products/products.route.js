@@ -8,7 +8,11 @@ export const productRouter = express.Router();
 productRouter.use(express.json());
 
 //Route handlers
-productRouter.get("/products", controller.getProducts);
-productRouter.get("/products/categories", controller.getCategories);
-productRouter.get("/products/categories/:id", controller.getSpecificProducts);
-productRouter.get("/products/:id", controller.getSpecificProduct);
+//Get all products.
+productRouter.get("/products", controller.getAllProducts);
+//Get all categories.
+productRouter.get("/products/categories", controller.getAllCategories);
+//Get products in a certain category.
+productRouter.get("/products/categories/:id", controller.getProductsInCategory);
+//Get a specific product.
+productRouter.get("/products/:id", controller.getProduct);

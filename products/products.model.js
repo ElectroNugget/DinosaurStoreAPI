@@ -26,57 +26,20 @@ export async function getAll() {
 //   await fs.writeFile(PRODUCTS_FILE, customersText);
 // }
 
-//Test function to check if customer ID exists.
-function find(customerArray, Id) {
-  return customerArray.findIndex(
-    (currCustomer) => currCustomer.customerId === Id
+//Test function to check if product ID exists.
+function find(productArray, Id) {
+  return productArray.findIndex(
+    (currProduct) => currProduct.productId === Id
   );
 }
 
 //Get a customer by a given ID. Returns an error if it does not exist.
-export async function getByID(customerId) {
-  let customerArray = await getAll();
-  let index = find(customerArray, customerId);
+export async function getByID(productId) {
+  let productArray = await getAll();
+  let index = find(productArray, productId);
   if (index === -1) {
-    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
+    throw new Error(`Product with ID: ${customerId} doesn't exist`);
   } else {
     return customerArray[index];
   }
 }
-
-// //Create a new customer. Returns an error if the ID is already taken.
-// export async function add(newCustomer) {
-//   let customerArray = await getAll();
-//   if (find(customerArray, newCustomer.customerId) !== -1) {
-//     throw new Error(
-//       `Customer with ID: ${newCustomer.customerId} already exists`
-//     );
-//   } else {
-//     customerArray.push(newCustomer);
-//     await save(customerArray);
-//   }
-// }
-
-// //Update an existing customer. Returns an error if there's no customer at the given ID.
-// export async function update(customerId, customer) {
-//   let customerArray = await getAll();
-//   let index = find(customerArray, customerId);
-//   if (index === -1) {
-//     throw new Error(`Customer with ID: ${customerId} doesn't exist`);
-//   } else {
-//     customerArray[index] = customer;
-//     await save(customerArray);
-//   }
-// }
-
-// //Delete an existing customer. Returns an error if there's no customer at the given ID.
-// export async function update(customerId) {
-//   let customerArray = await getAll();
-//   let index = find(customerArray, customerId);
-//   if (index === -1) {
-//     throw new Error(`Customer with ID: ${customerId} doesn't exist`);
-//   } else {
-//     customerArray.splice(index, 1); // remove customer from array
-//     await save(customerArray);
-//   }
-// }

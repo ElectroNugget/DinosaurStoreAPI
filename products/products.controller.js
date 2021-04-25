@@ -4,7 +4,7 @@ import * as productModel from "./products.model.js";
 // GET products; GET products/categories; GET products/categories/{id}; GET products/{id}
 
 // //GET products{id} : Gets all data on all products
-export async function getProducts(req, res) {
+export async function getAllProducts(req, res) {
   try {
     //Fill this in
     //   let id = parseInt(req.params.id);
@@ -16,7 +16,7 @@ export async function getProducts(req, res) {
 }
 
 // //GET products/categories : Gets all product categories
-export async function getCategories(req, res) {
+export async function getAllCategories(req, res) {
   try {
     //Fill this in
     //   let id = parseInt(req.params.id);

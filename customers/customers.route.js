@@ -15,6 +15,7 @@ customerRouter.post("/customers", controller.postCustomer);
 customerRouter.get("/customers/:id", controller.getCustomer);
 customerRouter.put("/customers/:id", controller.putCustomer);
 customerRouter.delete("/customers/:id", controller.deleteCustomer);
+
 //Cart functions
 customerRouter.post("/customers/:id/cart", controller.postCart);
 customerRouter.get("/customers/:id/cart", controller.getCart);
