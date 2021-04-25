@@ -21,7 +21,11 @@ export async function getByID(productId) {
 //Gets all products available.
 export async function getAllProducts() {
     let productArray = await getAll();
-    return productArray;
+    if (productArray.length === 0) {
+      throw new Error("No products found.")
+    } else {
+      return productArray;
+    }
 }
 
 //Gets all categories available.
@@ -29,14 +33,22 @@ export async function getAllCategories() {
     let productArray = await getAll();
     let categoryArray = productArray.map((dinosaur) => { return dinosaur.category });
     let uniqueCategories = categoryArray.filter(onlyUnique); //Has to be filtered again to return only 1 of each category.
-    return uniqueCategories;
+    if (uniqueCategories.length === 0) {
+      throw new Error("No categories found.")
+    } else {
+      return uniqueCategories;
+    }
 }
 
 //Gets all products in a given category.
 export async function getProductsInCategory(categoryId) {
     let productArray = await getAll();
     let categoryProductArray = productArray.filter(dinosaur => dinosaur.category === categoryId);
-    return categoryProductArray;
+    if (categoryProductArray.length === 0) {
+      throw new Error("No products in selected category.")
+    } else {
+      return categoryProductArray;
+    }
 }
 
 //HELPER FUNCTIONS://----------------------------------------------------------
