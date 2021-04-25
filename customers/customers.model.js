@@ -2,6 +2,10 @@
 import * as fs from "fs/promises";
 const CUSTOMERS_FILE = "./customers/customers.json";
 
+//import { readFile, writeFile } from "fs/promises";
+//const fs = require('fs')
+//const fs = require('fs').promises;
+
 //Get a customer by a given ID. Returns an error if it does not exist.
 export async function getByID(customerId) {
   let customerArray = await getAll();

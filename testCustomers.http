@@ -7,22 +7,22 @@ GET http://localhost:8000/customers HTTP/1.1
 POST http://localhost:8000/customers HTTP/1.1
 content-type: application/json
 
-{"customerId":16, "customerName": "Nikolaj Sloth"}
+{"customerId":1, "customerName": "Nikolaj Sloth"}
 ###
 
 // get customer by id
-GET http://localhost:8000/customers/15 HTTP/1.1
+GET http://localhost:8000/customers/1 HTTP/1.1
 
 ###
 
 // update customer
-PUT  http://localhost:8000/customers/15 HTTP/1.1
+PUT  http://localhost:8000/customers/1 HTTP/1.1
 content-type: application/json
 
 {"customerId":15, "customerName": "John Muller UPDATED!"}
 ###
 
 // delete customer
-DELETE  http://localhost:8000/customers/15 HTTP/1.1
+DELETE  http://localhost:8000/customers/1 HTTP/1.1
 
 ###

@@ -1,14 +1,20 @@
 import express from "express";
 
-const app = express();
+import { customersRouter } from "./customers/customers.route.js";
+// import { cartRouter } from "./cart/cart.route.js";
+// import { productsRouter } from "./products/products.route.js";
 
+const app = express();
 const PORT = 8000;
 
 app.use(express.json());
+app.use(customersRouter);
+// app.use(cartRouter);
+// app.use(productsRouter);
 
 // From the tutorial.
-app.get('/', (req, res) => res.send('Hello World!'));
-app.listen(PORT, () => console.log('Example app listening on port 8000!'));
+app.get("/", (req, res) => res.send("Hello World!"));
+app.listen(PORT, () => console.log("Example app listening on port 8000!"));
 
 // //Simple request time logger for a specific route
 // app.use('/home', (req, res, next) => {
@@ -25,19 +31,31 @@ app.listen(PORT, () => console.log('Example app listening on port 8000!'));
 // });
 
 //Whenever the server is called, log to console.
-app.use((req, res, next) => {
-  console.log("A new request received at " + Date.now());
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log("A new request received at " + Date.now());
+//   next();
+// });
 
-// /customers - POST only
-app.post("/customers", (req, res) => {
-    res.send(`{
+// app.get("/customers/:id", (req, res) => {
+//   res.send(req.params);
+// });
 
-    }`);
-});
+// // /customers - POST only
+// app.post("/customers", (req, res) => {
+//   res.send(`{
 
-// /products
-app.get("/products", (req, res) => {
-  res.send(req.params);
-});
+//     }`);
+// });
+
+// // /products
+// app.get("/products", (req, res) => {});
+
+// // For invalid routes
+// app.get("*", (req, res) => {
+//   res.send("404! This is an invalid URL.");
+// });
+
+// app.listen(PORT, function (err) {
+//   if (err) console.log("Error in server setup");
+//   console.log("Server listening on Port", PORT);
+// });

@@ -16,6 +16,7 @@ export async function postCustomer(req, res) {
 export async function getCustomer(req, res) {
   try {
     let id = parseInt(req.params.id);
+    console.log("Calling getCustomer with this id:" + id);
     let customer = await customerModel.getByID(id);
     res.json(customer); //How is this sent?
   } catch (error) {

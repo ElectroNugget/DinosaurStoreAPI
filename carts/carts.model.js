@@ -1,6 +1,6 @@
 //Acts as the MODEL for carts in this app.
 import * as fs from "fs/promises";
-const CART_FILE = "./cart/cart.json";
+const CARTS_FILE = "./cart/cart.json";
 
 //Get a cart by a given ID. Returns an error if it does not exist.
 export async function getByID(cartId) {
@@ -52,7 +52,7 @@ export async function remove(cartId) {
 //Return all carts on file.
 export async function getAll() {
   try {
-    let cartText = await fs.readFile(CART_FILE);
+    let cartText = await fs.readFile(CARTS_FILE);
     let cart = JSON.parse(cartText);
     return cart;
   } catch (error) {
@@ -68,7 +68,7 @@ export async function getAll() {
 //Save an array of carts to file.
 async function save(cart = []) {
   let cartText = JSON.stringify(cart);
-  await fs.writeFile(CART_FILE, cartText);
+  await fs.writeFile(CARTS_FILE, cartText);
 }
 
 //Test function to check if cart ID exists.
