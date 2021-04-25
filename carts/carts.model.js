@@ -8,11 +8,11 @@ const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 
 //Get a cart by a given ID. Returns an error if it does not exist.
-export async function getByID(cartId) {
+export async function getByID(customerId) {
   let cartArray = await getAll();
-  let index = find(cartArray, cartId);
+  let index = find(cartArray, customerId);
   if (index === -1) {
-    throw new Error(`Cart with ID: ${cartId} doesn't exist`);
+    throw new Error(`Cart with ID: ${customerId} doesn't exist`);
   } else {
     return cartArray[index];
   }
@@ -21,8 +21,8 @@ export async function getByID(cartId) {
 //Create a new cart. Returns an error if the ID is already taken.
 export async function add(newCart) {
   let cartArray = await getAll();
-  if (find(cartArray, newCart.cartId) !== -1) {
-    throw new Error(`Cart with ID: ${newCart.cartId} already exists`);
+  if (find(cartArray, newCart.customerId) !== -1) {
+    throw new Error(`Cart with ID: ${newCart.customerId} already exists`);
   } else {
     cartArray.push(newCart);
     await save(cartArray);
@@ -30,11 +30,11 @@ export async function add(newCart) {
 }
 
 //Update an existing cart. Returns an error if there's no cart at the given ID.
-export async function update(cartId, cart) {
+export async function update(customerId, cart) {
   let cartArray = await getAll();
-  let index = find(cartArray, cartId);
+  let index = find(cartArray, customerId);
   if (index === -1) {
-    throw new Error(`Cart with ID: ${cartId} doesn't exist`);
+    throw new Error(`Cart with ID: ${customerId} doesn't exist`);
   } else {
     cartArray[index] = cart;
     await save(cartArray);
@@ -42,11 +42,11 @@ export async function update(cartId, cart) {
 }
 
 //Delete an existing cart. Returns an error if there's no cart at the given ID.
-export async function remove(cartId) {
+export async function remove(customerId) {
   let cartArray = await getAll();
-  let index = find(cartArray, cartId);
+  let index = find(cartArray, customerId);
   if (index === -1) {
-    throw new Error(`Cart with ID: ${cartId} doesn't exist`);
+    throw new Error(`Cart with ID: ${customerId} doesn't exist`);
   } else {
     cartArray.splice(index, 1); // remove cart from array
     await save(cartArray);
@@ -78,5 +78,5 @@ async function save(cart = []) {
 
 //Test function to check if cart ID exists.
 function find(cartArray, Id) {
-  return cartArray.findIndex((currCart) => currCart.cartId === Id);
+  return cartArray.findIndex((currCart) => currCart.customerId === Id);
 }

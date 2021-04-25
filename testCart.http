@@ -1,18 +1,12 @@
-// create cart for specific user
+// create cart for specific user //WORKS
 POST http://localhost:8000/customers/1/cart HTTP/1.1
 content-type: application/json
 
-[
-  {
-    "customerId": 1,
-    "contents": [
-      { "productId": 1, "quantity": 1 }
-    ]
-  }
-]
+{"customerId": 1,"contents": [{ "productId": 1, "quantity": 1 }]}
 ###
 
-// get all information on a cart for a specific user
+
+// get all information on a cart for a specific user //WORKS
 GET http://localhost:8000/customers/1/cart HTTP/1.1
 
 ###
@@ -21,16 +15,15 @@ GET http://localhost:8000/customers/1/cart HTTP/1.1
 PUT  http://localhost:8000/customers/1/cart HTTP/1.1
 content-type: application/json
 
-[
   {
-    "cartId": 1,
+    "customerId": 1,
     "contents": [
       { "productId": 1, "quantity": 1 },
       { "productId": 2, "quantity": 2 },
       { "productId": 3, "quantity": 3 }
     ]
   }
-]
+
 ###
 
 // delete cart for a specific user
