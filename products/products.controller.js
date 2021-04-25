@@ -1,8 +1,6 @@
 //Acts as the CONTROLLER for products in this app.
 import * as productModel from "./products.model.js";
 
-// GET products; GET products/{id}; GET products/categories; GET products/categories/{id}
-
 // //GET products : Gets all data on all products
 export async function getAllProducts(req,res) {
     try {
