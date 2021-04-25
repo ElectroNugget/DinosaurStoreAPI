@@ -1,5 +1,5 @@
 //Acts as the MODEL for products in this app.
-import * as fs from "fs/promises";
+import * as fs from 'fs';
 const PRODUCTS_FILE = "./products/products.json";
 
 //Get a product by a given ID. Returns an error if it does not exist.

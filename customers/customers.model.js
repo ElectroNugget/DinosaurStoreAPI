@@ -1,5 +1,5 @@
 //Acts as the MODEL for customers in this app.
-import * as fs from "fs/promises";
+import * as fs from 'fs';
 const CUSTOMERS_FILE = "./customers/customers.json";
 
 //import { readFile, writeFile } from "fs/promises";

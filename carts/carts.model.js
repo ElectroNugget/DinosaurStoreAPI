@@ -1,5 +1,5 @@
 //Acts as the MODEL for carts in this app.
-import * as fs from "fs/promises";
+import * as fs from 'fs';
 const CARTS_FILE = "./cart/cart.json";
 
 //Get a cart by a given ID. Returns an error if it does not exist.
