@@ -31,7 +31,6 @@ export async function getAllProducts() {
 
 //Gets all categories available.
 export async function getAllCategories() {
-  console.log("Called getAllCategories in model");
   let categoryArray = await readCategoryFile();
   if (categoryArray.length === 0) {
     throw new Error("No categories found.");
@@ -95,14 +94,4 @@ async function save(products = []) {
 //Test function to check if product ID exists.
 function find(productArray, Id) {
   return productArray.findIndex((currProduct) => currProduct.productId === Id);
-}
-
-//Function to filter out unique values of an array.
-function onlyUnique(value, index, self) {
-  return self.indexOf(value) === index;
-}
-
-//Used to title case our categories. :P
-function titleCase(str) {
-  return str.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
 }

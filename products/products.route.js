@@ -17,7 +17,7 @@ productsRouter.use(express.json());
 productsRouter.get("/products", getAllProducts);
 //Get all categories.
 productsRouter.get("/products/categories", getAllCategories);
-//Get products in a certain category.
+//Get products in a certain category. Categories are defined as key-value pairs such as "size:Small"
 productsRouter.get("/products/categories/:key/:value", getProductsInCategory);
 //Get a specific product.
 productsRouter.get("/products/:id", getProduct);

@@ -39,7 +39,6 @@ export async function getProductsInCategory(req, res) {
   try {
     let categoryKey = req.params.key;
     let categoryValue = req.params.value;
-    // console.log("catkey and value:" + categoryKey + " " + categoryValue);
     let products = await productModel.getProductsInCategory(
       categoryKey,
       categoryValue
