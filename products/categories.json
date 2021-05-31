@@ -1,0 +1,7 @@
+[
+  {
+    "size": ["Small", "Medium", "Large"],
+    "manufacturer": ["InGen", "Biosyn", "Regenesis"],
+    "diet": ["Herbivore", "Carnivore"]
+  }
+]

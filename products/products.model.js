@@ -1,15 +1,16 @@
 //Acts as the MODEL for products in this app.
-import * as fs from 'fs';
+import * as fs from "fs";
 import { promisify } from "util";
 const PRODUCTS_FILE = "./products/products.json";
+const CATEGORIES_FILE = "./products/categories.json";
 
-// Convert fs.readFile + writeFile into Promise version of same    
+// Convert fs.readFile + writeFile into Promise version of same
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 
 //Get a product by a given ID. Returns an error if it does not exist.
 export async function getByID(productId) {
-  let productArray = await getAll();
+  let productArray = await readProductsFile();
   let index = find(productArray, productId);
   if (index === -1) {
     throw new Error(`Product with ID: ${productId} doesn't exist`);
@@ -20,44 +21,61 @@ export async function getByID(productId) {
 
 //Gets all products available.
 export async function getAllProducts() {
-    let productArray = await getAll();
-    if (productArray.length === 0) {
-      throw new Error("No products found.")
-    } else {
-      return productArray;
-    }
+  let productArray = await readProductsFile();
+  if (productArray.length === 0) {
+    throw new Error("No products found.");
+  } else {
+    return productArray;
+  }
 }
 
 //Gets all categories available.
 export async function getAllCategories() {
-    let productArray = await getAll();
-    let categoryArray = productArray.map((dinosaur) => { return dinosaur.category });
-    let uniqueCategories = categoryArray.filter(onlyUnique); //Has to be filtered again to return only 1 of each category.
-    if (uniqueCategories.length === 0) {
-      throw new Error("No categories found.")
-    } else {
-      return uniqueCategories;
-    }
+  console.log("Called getAllCategories in model");
+  let categoryArray = await readCategoryFile();
+  if (categoryArray.length === 0) {
+    throw new Error("No categories found.");
+  } else {
+    return categoryArray;
+  }
 }
 
 //Gets all products in a given category.
-export async function getProductsInCategory(categoryId) {
-    let productArray = await getAll();
-    let categoryProductArray = productArray.filter(dinosaur => dinosaur.category === categoryId);
-    if (categoryProductArray.length === 0) {
-      throw new Error("No products in selected category.")
-    } else {
-      return categoryProductArray;
-    }
+export async function getProductsInCategory(categoryKey, categoryValue) {
+  let productArray = await readProductsFile();
+  let categoryProductArray = productArray.filter(
+    (dinosaur) => dinosaur[categoryKey] === categoryValue
+  );
+  console.log(categoryProductArray);
+  if (categoryProductArray.length === 0) {
+    throw new Error("No products in selected category.");
+  } else {
+    return categoryProductArray;
+  }
 }
 
 //HELPER FUNCTIONS://----------------------------------------------------------
 //Return all products on file.
-export async function getAll() {
+export async function readProductsFile() {
   try {
     let productsText = await readFile(PRODUCTS_FILE);
     let products = JSON.parse(productsText);
     return products;
+  } catch (error) {
+    if (error.code === "ENOENT") {
+      await save([]);
+      return [];
+    } else {
+      throw error;
+    }
+  }
+}
+
+export async function readCategoryFile() {
+  try {
+    let categoryText = await readFile(CATEGORIES_FILE);
+    let categories = JSON.parse(categoryText);
+    return categories;
   } catch (error) {
     if (error.code === "ENOENT") {
       await save([]);
@@ -81,5 +99,10 @@ function find(productArray, Id) {
 
 //Function to filter out unique values of an array.
 function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
+  return self.indexOf(value) === index;
+}
+
+//Used to title case our categories. :P
+function titleCase(str) {
+  return str.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
 }

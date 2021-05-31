@@ -8,12 +8,22 @@ GET http://localhost:8000/products/categories HTTP/1.1
 
 ###
 
-// get all products in a specific category (Large)
-GET http://localhost:8000/products/categories/Large HTTP/1.1
+// get all products in a specific category (size/Small)
+GET http://localhost:8000/products/categories/size/Small HTTP/1.1
 
 ###
 
-// get all data on one product (Product 1)
-GET http://localhost:8000/products/1 HTTP/1.1
+// get all products in a specific category (manufacturer/ingen)
+GET http://localhost:8000/products/categories/manufacturer/InGen HTTP/1.1
+
+###
+
+// get all products in a specific category (diet/carnivore)
+GET http://localhost:8000/products/categories/diet/Carnivore HTTP/1.1
+
+###
+
+// get all data on one product (Product 33)
+GET http://localhost:8000/products/33 HTTP/1.1
 
 ###
