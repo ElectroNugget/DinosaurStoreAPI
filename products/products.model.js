@@ -10,6 +10,8 @@ const writeFile = promisify(fs.writeFile);
 
 //Get a product by a given ID. Returns an error if it does not exist.
 export async function getByID(productId) {
+  console.log("Calling product getByID with this Id:", productId)
+  
   let productArray = await readProductsFile();
   let index = find(productArray, productId);
   if (index === -1) {
