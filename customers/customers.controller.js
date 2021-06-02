@@ -17,13 +17,24 @@ export async function postCustomer(req, res) {
 export async function getCustomer(req, res) {
   try {
     let id = parseInt(req.params.id);
-    console.log("Calling getCustomer with this id: " + id);
-    let customer = await customerModel.getByID(id); //gets stuck here
-    res.json(customer); //How is this sent?
+    let customer = await customerModel.getByID(id); 
+    res.json(customer); 
   } catch (error) {
     res.status(400).send(error.message);
   }
 }
+
+// //Gets all the customer deets from the API to be used to 'login'
+// export async function getCustomerId(req, res) {
+//   try {
+//     let email = parseInt(req.params.email);
+//     console.log("Calling getCustomerId with this email: " + email);
+//     let customer = await customerModel.getByEmail(email); 
+//     res.json(customer); 
+//   } catch (error) {
+//     res.status(400).send(error.message);
+//   }
+// }
 
 // //PUT customers{id} : Update data on a given customer, if it exists
 export async function putCustomer(req, res) {

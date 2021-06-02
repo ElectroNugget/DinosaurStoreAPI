@@ -9,49 +9,60 @@ const writeFile = promisify(fs.writeFile);
 
 //Get a customer by a given ID. Returns an error if it does not exist.
 export async function getByID(customerId) {
-  let customerArray = await getAll();
-  let index = find(customerArray, customerId);
+  let customersObject = await getAll();
+  let index = find(customersObject.customers, customerId);
   if (index === -1) {
-    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
+    throw new Error(`Customer with ID: ${customerId} doesn't exist.`);
   } else {
-    return customerArray[index];
+    return customersObject.customers[index];
   }
 }
 
-//Create a new customer. Returns an error if the ID is already taken.
+// export async function getByEmail(customerEmail) {
+//   let customersObject = await getAll();
+//   let index = findEmail(customersObject.customers, customerEmail);
+//   if (index === -1) {
+//     throw new Error(`Customer with email: ${customerEmail} doesn't exist.`);
+//   } else {
+//     return customersObject.customers[index];
+//   }
+// }
+
+//Create a new customer. Returns an error if the given email is already taken.
 export async function add(newCustomer) {
-  let customerArray = await getAll();
-  if (find(customerArray, newCustomer.customerId) !== -1) {
+  let customersObject = await getAll();
+  if (findEmail(customersObject.customers, newCustomer.email) !== -1) {
     throw new Error(
-      `Customer with ID: ${newCustomer.customerId} already exists`
+      `Customer with this email already exists.`
     );
   } else {
-    customerArray.push(newCustomer);
-    await save(customerArray);
+    newCustomer.customerId = ++customersObject.count;
+    customersObject.customers.push(newCustomer);
+    await save(customersObject);
   }
 }
 
 //Update an existing customer. Returns an error if there's no customer at the given ID.
 export async function update(customerId, customer) {
-  let customerArray = await getAll();
-  let index = find(customerArray, customerId);
+  let customersObject = await getAll();
+  let index = find(customersObject.customers, customerId);
   if (index === -1) {
-    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
+    throw new Error(`Customer with ID: ${customerId} doesn't exist.`);
   } else {
-    customerArray[index] = customer;
-    await save(customerArray);
+    customersObject.customers[index] = customer;
+    await save(customersObject);
   }
 }
 
 //Delete an existing customer. Returns an error if there's no customer at the given ID.
 export async function remove(customerId) {
-  let customerArray = await getAll();
-  let index = find(customerArray, customerId);
+  let customersObject = await getAll();
+  let index = find(customersObject.customers, customerId);
   if (index === -1) {
-    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
+    throw new Error(`Customer with ID: ${customerId} doesn't exist.`);
   } else {
-    customerArray.splice(index, 1); // remove customer from array
-    await save(customerArray);
+    customersObject.customers.splice(index, 1); // remove customer from array
+    await save(customersObject);
   }
 }
 
@@ -60,8 +71,8 @@ export async function remove(customerId) {
 export async function getAll() {
   try {
     let customersText = await readFile(CUSTOMERS_FILE);
-    console.log(typeof(customersText));
     let customers = JSON.parse(customersText);
+    console.log("customers in getAll", customers)
     return customers;
   } catch (error) {
     if (error.code === "ENOENT") {
@@ -85,3 +96,9 @@ function find(customerArray, Id) {
     (currCustomer) => currCustomer.customerId === Id
   );
 }
+
+// function findEmail(thisArray, email) {
+//   return thisArray.findIndex(
+//     (currCustomer) => currCustomer.email === email
+//   );
+// }

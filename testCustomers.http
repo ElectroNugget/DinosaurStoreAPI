@@ -1,13 +1,15 @@
-// get all customers //WIP
-GET http://localhost:8000/customers HTTP/1.1
-
-###
-
 // create customer Nikolaj //WORKS
 POST http://localhost:8000/customers HTTP/1.1
 content-type: application/json
 
-{"customerId":4, "customerName": "Nikolaj Sloth"}
+{"firstName": "Nikolaj", "lastName":"Sloth", "email":"niko@email.com"}
+###
+
+//Add another customer?
+POST http://localhost:8000/customers HTTP/1.1
+content-type: application/json
+
+{"firstName": "James", "lastName":"Landon", "email":"james@email.com"}
 ###
 
 // get customer by id //WORKS
@@ -15,21 +17,14 @@ GET http://localhost:8000/customers/1 HTTP/1.1
 
 ###
 
-// update customer Andrew //WORKS
+// update customer Nikolaj //WORKS
 PUT  http://localhost:8000/customers/1 HTTP/1.1
 content-type: application/json
 
-{"customerId":1, "customerName": "Andrew McElwee UPDATED!"}
-###
-
-// update customer Andrew to Default //WORKS
-PUT  http://localhost:8000/customers/1 HTTP/1.1
-content-type: application/json
-
-{"customerId":1, "customerName": "Andrew McElwee"}
+{"customerId":1, "firstName": "Nikolaj TWO", "lastName":"Sloth TWO", "email":"niko@email.com"}
 ###
 
 // delete customer Nikolaj
-DELETE  http://localhost:8000/customers/4 HTTP/1.1
+DELETE  http://localhost:8000/customers/1 HTTP/1.1
 
 ###
