@@ -30,6 +30,19 @@ export async function getCustomer(req, res) {
   }
 }
 
+// //GET customers/login : Gets all data on a given customer, if it exists
+export async function loginCustomer(req, res) {
+  try {
+    log("Calling loginCustomer before JSON.parse with this req.body", req.body)
+    let email = req.body.email;
+    log("Calling loginCustomer with this email:", email)
+    let customer = await customerModel.getByEmail(email); 
+    res.json(customer);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+}
+
 // //PUT customers{id} : Update data on a given customer, if it exists
 export async function putCustomer(req, res) {
   try {
