@@ -23,6 +23,7 @@ export async function getByID(productId) {
 
 //Gets all products available.
 export async function getAllProducts() {
+  console.log("Calling getAllProducts");
   let productArray = await readProductsFile();
   if (productArray.length === 0) {
     throw new Error("No products found.");
@@ -43,11 +44,11 @@ export async function getAllCategories() {
 
 //Gets all products in a given category.
 export async function getProductsInCategory(categoryKey, categoryValue) {
+  console.log("Calling getProductsInCategory with these values: " + categoryKey +"/"+ categoryValue);
   let productArray = await readProductsFile();
   let categoryProductArray = productArray.filter(
     (dinosaur) => dinosaur[categoryKey] === categoryValue
   );
-  console.log(categoryProductArray);
   if (categoryProductArray.length === 0) {
     throw new Error("No products in selected category.");
   } else {

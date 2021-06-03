@@ -4,6 +4,11 @@ import * as fs from 'fs';
 import { promisify } from "util";
 const CARTS_FILE = "./carts/carts.json";
 
+// Duplicate array for testing
+// [{"customerId":1,"contents":[{"productId":1,"quantity":1}]}]
+// Empty array for testing
+// [{"customerId":1,"contents":[]}]
+
 // Convert fs.readFile + writeFile into Promise version of same    
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
@@ -49,12 +54,13 @@ export async function addCart(newCart) {
 
 //Update an existing cart. Returns an error if there's no cart at the given ID.
 export async function update(customerId, cart) {
+  console.log("calling updateCart with this cart:", cart)
   let cartArray = await getAll();
   let index = find(cartArray, customerId);
   if (index === -1) {
     throw new Error(`Cart with ID: ${customerId} doesn't exist`);
   } else {
-    cartArray[index] = cart;
+    cartArray[index].contents = cart;
     await save(cartArray);
   }
 }
