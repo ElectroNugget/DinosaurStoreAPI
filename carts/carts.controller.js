@@ -5,7 +5,7 @@ import * as cartsModel from "./carts.model.js";
 export async function postCart(req, res) {
   try {
     let newCart = req.body;
-    await cartsModel.add(newCart);
+    await cartsModel.addCart(newCart);
     res.end();
   } catch (error) {
     res.status(400).send(error.message);
