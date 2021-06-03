@@ -9,6 +9,5 @@ customersRouter.use(express.json());
 //Route handlers
 customersRouter.post("/customers", postCustomer);
 customersRouter.get("/customers/:id", getCustomer);
-// customersRouter.get("/customers/login/:email",getCustomerId)
 customersRouter.put("/customers/:id", putCustomer);
 customersRouter.delete("/customers/:id", deleteCustomer);
