@@ -9,7 +9,9 @@ export async function postCustomer(req, res) {
   try {
     let newCustomer = req.body;
     log("Calling postCustomer with this data:",newCustomer);
-    await customerModel.add(newCustomer);
+    //This returns the new customerId as a kind of primitive cookie.
+    let newCustomerId = await customerModel.add(newCustomer);
+    res.json(newCustomerId);
     res.end();
   } catch (error) {
     res.status(400).send(error.message);

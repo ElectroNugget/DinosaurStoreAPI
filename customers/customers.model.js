@@ -3,11 +3,14 @@ import * as fs from "fs";
 import { promisify } from "util";
 const CUSTOMERS_FILE = "./customers/customers.json";
 
+// Blank customers.json for testing
+// {"count":0,"customers":[]}
+
 // Convert fs.readFile + writeFile into Promise version of same    
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 // Makes logging a little less boilerplate.
-const log = console.log();
+const log = console.log;
 
 //Get a customer by a given ID. Returns an error if it does not exist.
 export async function getByID(customerId) {
@@ -41,6 +44,9 @@ export async function add(newCustomer) {
     newCustomer.customerId = ++customersObject.count;
     customersObject.customers.push(newCustomer);
     await save(customersObject);
+    //Sends this ID back up the chain to be used as a cookie.
+    log("Sending this ID back:", newCustomer.customerId);
+    return (newCustomer.customerId);
   }
 }
 
