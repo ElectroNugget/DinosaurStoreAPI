@@ -1,4 +1,5 @@
 //Acts as the MODEL for carts in this app.
+import e from 'express';
 import * as fs from 'fs';
 import { promisify } from "util";
 const CARTS_FILE = "./carts/carts.json";
@@ -19,7 +20,7 @@ export async function getByID(customerId) {
 }
 
 //Create a new cart. Returns an error if the ID is already taken.
-export async function add(newCart) {
+export async function addCart(newCart) {
   let cartArray = await getAll();
   if (find(cartArray, newCart.customerId) !== -1) {
     throw new Error(`Cart with ID: ${newCart.customerId} already exists`);
@@ -28,6 +29,23 @@ export async function add(newCart) {
     await save(cartArray);
   }
 }
+
+//Make an ADD ITEM TO CART method?
+// export async function addItem(customerId, productId) {
+//   let cartArray = await getAll();
+//   let index = find(cartArray, customerId);
+//   if (index === -1) {
+//     throw new Error(`Cannot add item. Cart with ID: ${customerId} doesn't exist`);
+//   } else {
+//     let productIndex = findProduct(cartArray[index])
+//     if (productIndex  === -1) {
+//       cartArray[index].push({"productId":productId,"quantity":1})
+//     } else {
+//       cartArray[index].quantity++;
+//     }
+//   }
+// }
+// Might not be necessary.
 
 //Update an existing cart. Returns an error if there's no cart at the given ID.
 export async function update(customerId, cart) {
@@ -80,3 +98,9 @@ async function save(cart = []) {
 function find(cartArray, Id) {
   return cartArray.findIndex((currCart) => currCart.customerId === Id);
 }
+
+//Test function to see if a specific product exists in a cart.
+// Might not be needed.
+// function findProduct(cartArray, Id) {
+//   return cartArray.findIndex((currCart)=> currCart.productId === Id );
+// }

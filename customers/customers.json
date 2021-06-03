@@ -1,1 +1,1 @@
-{"count":1,"customers":[{},{"firstName":"Nikolaj","lastName":"Sloth","email":"niko@email.com","customerId":1}]}
+{"count":2,"customers":[{"firstName":"Nikolaj","lastName":"Sloth","email":"niko@email.com","customerId":1},{"firstName":"James","lastName":"Landon","email":"james@email.com","customerId":2}]}

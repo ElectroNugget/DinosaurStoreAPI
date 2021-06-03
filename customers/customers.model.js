@@ -3,9 +3,14 @@ import * as fs from "fs";
 import { promisify } from "util";
 const CUSTOMERS_FILE = "./customers/customers.json";
 
+// Blank customers.json for testing
+// {"count":0,"customers":[]}
+
 // Convert fs.readFile + writeFile into Promise version of same    
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
+// Makes logging a little less boilerplate.
+const log = console.log;
 
 //Get a customer by a given ID. Returns an error if it does not exist.
 export async function getByID(customerId) {
@@ -18,15 +23,15 @@ export async function getByID(customerId) {
   }
 }
 
-// export async function getByEmail(customerEmail) {
-//   let customersObject = await getAll();
-//   let index = findEmail(customersObject.customers, customerEmail);
-//   if (index === -1) {
-//     throw new Error(`Customer with email: ${customerEmail} doesn't exist.`);
-//   } else {
-//     return customersObject.customers[index];
-//   }
-// }
+export async function getByEmail(customerEmail) {
+  let customersObject = await getAll();
+  let index = findEmail(customersObject.customers, customerEmail);
+  if (index === -1) {
+    throw new Error(`Customer with email: ${customerEmail} doesn't exist.`);
+  } else {
+    return customersObject.customers[index];
+  }
+}
 
 //Create a new customer. Returns an error if the given email is already taken.
 export async function add(newCustomer) {
@@ -39,6 +44,9 @@ export async function add(newCustomer) {
     newCustomer.customerId = ++customersObject.count;
     customersObject.customers.push(newCustomer);
     await save(customersObject);
+    //Sends this ID back up the chain to be used as a cookie.
+    log("Sending this ID back:", newCustomer.customerId);
+    return (newCustomer.customerId);
   }
 }
 
@@ -72,7 +80,6 @@ export async function getAll() {
   try {
     let customersText = await readFile(CUSTOMERS_FILE);
     let customers = JSON.parse(customersText);
-    console.log("customers in getAll", customers)
     return customers;
   } catch (error) {
     if (error.code === "ENOENT") {
@@ -90,15 +97,16 @@ async function save(customers = []) {
   await writeFile(CUSTOMERS_FILE, customersText);
 }
 
-//Test function to check if customer ID exists.
-function find(customerArray, Id) {
-  return customerArray.findIndex(
+//Test function: Checks if a customer with the given Id exists..
+function find(custIdArray, Id) {
+  return custIdArray.findIndex(
     (currCustomer) => currCustomer.customerId === Id
   );
 }
 
-// function findEmail(thisArray, email) {
-//   return thisArray.findIndex(
-//     (currCustomer) => currCustomer.email === email
-//   );
-// }
+//Test function: Checks if a customer with the given email exists.
+function findEmail(custEmailArray, email) {
+  return custEmailArray.findIndex(
+    (currCustomer) => currCustomer.email === email
+  );
+}
